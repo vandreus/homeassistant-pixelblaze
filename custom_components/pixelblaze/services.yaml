@@ -1,0 +1,36 @@
+set_vars:
+  name: Set pattern variables
+  description: Send setVars to the active pattern (exported variables).
+  fields:
+    device_id:
+      name: Device
+      description: Pixelblaze device (optional when only one is configured).
+      selector:
+        device:
+          integration: pixelblaze
+    variables:
+      name: Variables
+      description: 'Map of variable name to value, e.g. {"speed": 8}.'
+      required: true
+      selector:
+        object:
+
+set_pattern:
+  name: Set pattern
+  description: Activate a saved pattern by name or id.
+  fields:
+    device_id:
+      name: Device
+      description: Pixelblaze device (optional when only one is configured).
+      selector:
+        device:
+          integration: pixelblaze
+    name:
+      name: Pattern name
+      example: Stairs Snake
+      selector:
+        text:
+    id:
+      name: Pattern id
+      selector:
+        text:

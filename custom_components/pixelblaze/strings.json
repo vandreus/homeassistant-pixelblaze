@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a Pixelblaze",
+        "data": {
+          "host": "Host or IP address",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the Pixelblaze WebSocket (port 81)"
+    },
+    "abort": {
+      "already_configured": "This Pixelblaze is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Pixelblaze options",
+        "data": {
+          "poll_interval": "Poll interval (seconds)",
+          "dynamic_vars": "Create entities for the active pattern's variables"
+        }
+      }
+    }
+  },
+  "entity": {
+    "select": {
+      "pattern": { "name": "Pattern" }
+    },
+    "switch": {
+      "sequencer": { "name": "Sequencer (shuffle)" }
+    },
+    "sensor": {
+      "fps": { "name": "FPS" },
+      "storage": { "name": "Storage used" }
+    }
+  }
+}

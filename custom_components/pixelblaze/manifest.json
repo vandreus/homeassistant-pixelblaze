@@ -1,0 +1,12 @@
+{
+  "domain": "pixelblaze",
+  "name": "Pixelblaze",
+  "codeowners": ["@vandreus"],
+  "config_flow": true,
+  "documentation": "https://github.com/vandreus/homeassistant-pixelblaze",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/vandreus/homeassistant-pixelblaze/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
