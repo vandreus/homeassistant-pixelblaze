@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ajouter un Pixelblaze",
+        "data": {
+          "host": "Hôte ou adresse IP",
+          "name": "Nom"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Connexion impossible au WebSocket du Pixelblaze (port 81)"
+    },
+    "abort": {
+      "already_configured": "Ce Pixelblaze est déjà configuré"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options Pixelblaze",
+        "data": {
+          "poll_interval": "Intervalle d'interrogation (secondes)",
+          "dynamic_vars": "Créer des entités pour les variables du motif actif"
+        }
+      }
+    }
+  },
+  "entity": {
+    "select": {
+      "pattern": { "name": "Motif" }
+    },
+    "switch": {
+      "sequencer": { "name": "Séquenceur (aléatoire)" }
+    },
+    "sensor": {
+      "fps": { "name": "FPS" },
+      "storage": { "name": "Stockage utilisé" }
+    }
+  }
+}
