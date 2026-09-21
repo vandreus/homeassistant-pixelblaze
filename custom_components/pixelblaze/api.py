@@ -155,7 +155,9 @@ class PixelblazeClient:
 
     async def _initial_sync(self) -> None:
         await self.send({"getConfig": True})
+        await asyncio.sleep(0.2)
         await self.send({"listPrograms": True})
+        await asyncio.sleep(0.2)
         await self.send({"getVars": True})
 
     # ---------------------------------------------------------------- frames
@@ -242,18 +244,24 @@ class PixelblazeClient:
         await ws.send_str(json.dumps(payload))
 
     async def poll(self) -> None:
-        """Request fresh config + vars and wait for both responses."""
+        """Request fresh config, then vars, and wait for the responses.
+
+        The controller ignores a second command sent in the same breath as the
+        first, so the two requests are sequenced rather than pipelined. Losing
+        the variables is not fatal: patterns without exported variables never
+        answer, and a dropped reply must not fail the whole update.
+        """
         self._got_config.clear()
-        self._got_vars.clear()
         await self.send({"getConfig": True})
-        await self.send({"getVars": True})
         try:
-            await asyncio.wait_for(
-                asyncio.gather(self._got_config.wait(), self._got_vars.wait()),
-                REQUEST_TIMEOUT,
-            )
+            await asyncio.wait_for(self._got_config.wait(), REQUEST_TIMEOUT)
         except TimeoutError as err:
             raise PixelblazeError("Timed out polling Pixelblaze") from err
+
+        self._got_vars.clear()
+        await self.send({"getVars": True})
+        with contextlib.suppress(TimeoutError):
+            await asyncio.wait_for(self._got_vars.wait(), REQUEST_TIMEOUT)
 
     async def refresh_patterns(self) -> dict[str, str]:
         self._got_patterns.clear()
